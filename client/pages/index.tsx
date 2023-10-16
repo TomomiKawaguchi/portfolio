@@ -1,5 +1,8 @@
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import { useAuth } from "@/context/auth";
+import { login, logout } from "@/lib/Auth";
+import { useState } from "react";
 import { Box, Heading, List, ListItem, Icon } from "@chakra-ui/react";
 import { FaCheckCircle } from "react-icons/fa";
 import Link from 'next/link'
@@ -8,12 +11,23 @@ const inter = Inter({ subsets: ['latin'] })
 
 
 
-
-
-
-
 export default function Home() {
  
+  const user = useAuth();
+  const [waiting, setWaiting] = useState<boolean>(false);
+
+  const signIn = () => {
+    setWaiting(true);
+
+    login()
+      .catch((error) => {
+        console.error(error?.code);
+      })
+      .finally(() => {
+        setWaiting(false);
+      });
+  };
+  
 
   return (
     <main className={styles.main}>
@@ -22,11 +36,10 @@ export default function Home() {
       <div>
        
        <Link href="/login">
-         <button>管理者LOGIN</button>
+         <button>LOGIN</button>
        </Link>
      
      </div>
-
 
      <div className={styles.center}>
       <h1>
@@ -137,5 +150,4 @@ export default function Home() {
     </main>
     
   )
-  
-}
+     };

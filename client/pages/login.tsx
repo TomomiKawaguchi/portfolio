@@ -45,27 +45,42 @@ export const Page = () => {
   const [password, setPassword] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const toast = useToast()
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    setIsLoading(true)
-    e.preventDefault()
+    e.preventDefault();
+
+    // メールアドレスやパスワードが空の場合、エラートーストを表示して処理を中止
+    if (!email || !password) {
+      toast({
+        title: 'メールアドレスとパスワードを入力してください。',
+        status: 'error',
+        position: 'top',
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
     try {
-      const auth = getAuth()
-      await signInWithEmailAndPassword(auth, email, password)
-      setEmail('')
-      setPassword('')
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth, email, password);
+      setEmail('');
+      setPassword('');
       toast({
         title: 'ログインしました。',
         status: 'success',
         position: 'top',
-      })
-      //TODO: ログイン後のページに遷移の処理を書く
+      });
+      router.push('/'); // ログイン成功時にTOPページにリダイレクト
+
     } catch (e) {
       toast({
         title: 'エラーが発生しました。',
         status: 'error',
         position: 'top',
-      })
+      });
+
       if (e instanceof FirebaseError) {
         console.log(e)
       }
@@ -118,3 +133,4 @@ export const Page = () => {
   )
 }
 export default Page
+
