@@ -1,4 +1,5 @@
 node_modules/
-.env
+lib/env
 client/node_modules/
-..env.local
+lib/env.local
+gitignore
