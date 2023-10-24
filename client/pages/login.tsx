@@ -2,8 +2,6 @@
 
 import { useRouter } from "next/router"
 import Link from "next/link"
-// // import { useAuthContext } from "./AuthContext"
-// import { app } from "lib/firebase"
 import { ChakraProvider } from '@chakra-ui/react'
 import {
   Box,
@@ -25,15 +23,8 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { FirebaseError } from '@firebase/util'
 
 
-// import React, { useState } from 'react';
-// import { auth } from 'lib/firebase'; // あなたのFirebase設定が格納されているファイルのパスを適切に設定してください。
 
-// export default function Login() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
 
-//   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
-//   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
 
 
